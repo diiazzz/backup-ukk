@@ -6,15 +6,20 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
-{  
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard.kategori.index');
+        $keyword = $request->keyword;
+        $kategori = Kategori::where('nm_kategori', 'LIKE', '%' . $keyword . '%')->Paginate(2);
+        return view('dashboard.kategori.index', compact(
+            'kategori',
+            'keyword'
+        ));
     }
 
     /**
@@ -24,7 +29,10 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        $tambah = Kategori::all();
+        return view('dashboard.kategori.create', compact(
+            'tambah'
+        ));
     }
 
     /**
@@ -35,7 +43,12 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nm_kategori' => 'required|string',
+        ]);
+        Kategori::create($validatedData);
+
+        return redirect('/kategori');
     }
 
     /**

@@ -57,5 +57,3 @@ Route::get('/dashboard', function () {
 Route::resource('/DataProduk', DataProdukController::class);
 
 Route::resource('/kategori', KategoriController::class);
-
-

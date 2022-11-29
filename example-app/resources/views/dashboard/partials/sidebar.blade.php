@@ -87,7 +87,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="/DataProduk">
+        <a class="nav-link" href="/kategori">
             <i class="fas fa-fw fa-table"></i>
             <span>Kategori</span></a>
     </li>
