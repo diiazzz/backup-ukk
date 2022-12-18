@@ -18,8 +18,10 @@ use App\Http\Controllers\KategoriController;
 |
 */
 
+
+// Route frontend index user
 Route::get('/', function () {
-    return view('userpage.userhome');
+    return view('frontend.pages.index');
 });
 
 Route::get('/shop', function () {

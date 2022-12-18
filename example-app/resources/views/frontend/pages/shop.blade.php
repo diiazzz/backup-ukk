@@ -1,4 +1,4 @@
-@extends('userpage.layouts.main')
+{{-- @extends('userpage.layouts.main')
 
 @section('container')
 <div class="container-fluid pt-5">
@@ -330,4 +330,4 @@
         </div>
     </div>
 
-    @endsection  
+    @endsection   --}}

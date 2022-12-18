@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,18 +23,10 @@
 
 <body>
     <main class="form-signin">
-        <form action="/register" method="POST">
+        <form action="/login" method="POST">
           <h1 class="h3 mb-3 fw-normal">Selamat Datang</h1>
       
           @csrf
-          <div class="form-floating">
-            <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Nama">
-            <label for="floatingInput">Nama</label>
-          </div>
-          <div class="form-floating">
-            <input type="text" name="no_hp" class="form-control" id="floatingInput" placeholder="No. Handpohone">
-            <label for="floatingInput">No. Handphone</label>
-          </div>
           <div class="form-floating">
             <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email">
             <label for="floatingInput">Email</label>
@@ -44,7 +36,7 @@
             <label for="floatingPassword">Password</label>
           </div>
 
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Daftar</button>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Masuk</button>
         </form>
       </main>
 
@@ -53,4 +45,4 @@
     <script src="{{asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
-</html>
+</html> --}}

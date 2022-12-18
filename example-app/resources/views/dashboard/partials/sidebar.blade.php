@@ -23,9 +23,9 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    {{-- <div class="sidebar-heading">
         Interface
-    </div>
+    </div> --}}
 
     <!-- Nav Item - Pages Collapse Menu -->
 
@@ -50,7 +50,7 @@
     </li> --}}
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    {{-- <hr class="sidebar-divider"> --}}
 
     <!-- Heading -->
     {{-- <div class="sidebar-heading">
@@ -91,6 +91,7 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Kategori</span></a>
     </li>
+    <hr class="sidebar-divider d-none d-md-block">
     <li class="nav-item">
         <a class="nav-link" href="/DataProduk">
             <i class="fas fa-fw fa-table"></i>
