@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->string('nm_produk');
-            $table->string('stock_produk');
-            $table->double('harga_produk');
+            $table->foreignId('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
+            $table->integer('stock_produk');
+            $table->integer('harga_produk');
             $table->string('deskripsi_produk');
-            $table->string('foto_produk');
-
+            $table->string('foto_produk')->nullable();
             $table->timestamps();
         });
     }

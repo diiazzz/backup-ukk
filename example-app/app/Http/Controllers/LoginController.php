@@ -13,13 +13,13 @@ class LoginController extends Controller
 
     public function store(Request $request) {
         $data = $request->validate([
-            'email' => 'required',
+            'email' => 'required|email:dns',
             'password' => 'required'
         ]);
 
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
- 
+
             if (auth()->user()->is_admin) {
                 return redirect('/dashboard');
             } else {
@@ -27,9 +27,7 @@ class LoginController extends Controller
             }
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->with('error', 'Login gagal, cek email atau password kembali!');
     }
 
     public function logout(Request $request) {
@@ -39,6 +37,6 @@ class LoginController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/');
+        return redirect('/login')->with('success', 'Anda berhasil logout!');
     }
 }

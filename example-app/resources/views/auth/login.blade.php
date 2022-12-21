@@ -1,48 +1,58 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
+@extends('frontend.layouts.main')
+@section('container')  
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 justify-content-center">
+      <div class="col-lg-7 mb-5">
 
-<head>
-    <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
-
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/signin.css') }}" rel="stylesheet">
-</head>
-
-<body>
-    <main class="form-signin">
-        <form action="/login" method="POST">
-          <h1 class="h3 mb-3 fw-normal">Selamat Datang</h1>
-      
-          @csrf
-          <div class="form-floating">
-            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email">
-            <label for="floatingInput">Email</label>
+        @if (session()->has('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div class="form-floating">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+        @endif
+        
+        @if (session()->has('error'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+        @endif
 
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Masuk</button>
-        </form>
-      </main>
-
-
-    <!-- Template Javascript -->
-    <script src="{{asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-</body>
-
-</html> --}}
+        <div class="card shadow-lg border-0 rounded">
+          <div class="text-center mt-4">
+            <h2 class="px-5"><span class="px-2">Silahkan Login!</span></h2>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('login') }}" method="POST">
+              @csrf
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Account</label>
+                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" required="required" name="email"
+                  id="email" value="{{ old('email') }}" autofocus />
+                  @error('email')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Your Password</label>
+                <input type="password" class="form-control" placeholder="Password" required="required" name="password"
+                  id="password" />
+              </div>
+              <div class="text-center mt-4 pt-2">
+                <div class="mb-3">
+                  <button class="btn btn-primary py-2 px-4 rounded" type="submit">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
