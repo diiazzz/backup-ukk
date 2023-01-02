@@ -1,4 +1,4 @@
-@extends('userpage.layouts.main')
+{{-- @extends('userpage.layouts.main')
 
 @section('container')
 <!-- Shop Detail Start -->
@@ -237,4 +237,4 @@
 </div>
 <!-- Shop Detail End -->
 
-@endsection  
+@endsection   --}}

@@ -1,4 +1,4 @@
-@extends('userpage.layouts.main')
+{{-- @extends('userpage.layouts.main')
 
 @section('container')
  <!-- Checkout Start -->
@@ -187,4 +187,4 @@
 </div>
 <!-- Checkout End -->
 
-@endsection  
+@endsection   --}}

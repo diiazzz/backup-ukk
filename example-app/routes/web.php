@@ -18,42 +18,23 @@ use App\Http\Controllers\KategoriController;
 |
 */
 
+
+// Route frontend index user
 Route::get('/', function () {
-    return view('userpage.userhome');
+    return view('frontend.pages.index');
 });
 
-Route::get('/shop', function () {
-    return view('userpage.shop');
-});
-
-Route::get('/cart', function () {
-    return view('userpage.cart');
-});
-
-Route::get('/checkout', function () {
-    return view('userpage.checkout');
-});
-
-Route::get('/contact', function () {
-    return view('userpage.contact');
-});
-
-Route::get('/detail', function () {
-    return view('userpage.detail');
-});
-
-Route::get('login', [LoginController::class, 'index']);
-Route::post('login', [LoginController::class, 'store']);
-
-Route::get('register', [RegisterController::class, 'index']);
-Route::post('register', [RegisterController::class, 'store']);
-
-Route::get('logout', [LoginController::class, 'logout'])->middleware(['auth']);
+// Route Auth
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware(['auth', 'admin']);
 
-Route::resource('/DataProduk', DataProdukController::class);
-
-Route::resource('/kategori', KategoriController::class);
+// Route Admin Managements
+Route::resource('dataProduk', DataProdukController::class)->middleware('admin');
+Route::resource('kategori', KategoriController::class)->middleware('admin');

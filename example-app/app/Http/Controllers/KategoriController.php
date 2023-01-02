@@ -12,14 +12,10 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->keyword;
-        $kategori = Kategori::where('nm_kategori', 'LIKE', '%' . $keyword . '%')->Paginate(2);
-        return view('dashboard.kategori.index', compact(
-            'kategori',
-            'keyword'
-        ));
+        $kategori = Kategori::get();
+        return view('dashboard.adminPages.kategori.index', compact('kategori'));
     }
 
     /**
@@ -29,10 +25,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        $tambah = Kategori::all();
-        return view('dashboard.kategori.create', compact(
-            'tambah'
-        ));
+        return view('dashboard.adminPages.kategori.create');
     }
 
     /**
@@ -46,9 +39,14 @@ class KategoriController extends Controller
         $validatedData = $request->validate([
             'nm_kategori' => 'required|string',
         ]);
-        Kategori::create($validatedData);
 
-        return redirect('/kategori');
+        $kategori = Kategori::create($validatedData);
+
+        if($kategori) {
+            return redirect()->route('kategori.index')->with('success', 'Data berhasil di tambahkan');
+        } else {
+            return redirect()->route('kategori.index')->with('error', 'Data gagal ditambahkan');
+        }
     }
 
     /**
@@ -68,9 +66,10 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kategori $kategori)
+    public function edit($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        return view('dashboard.adminPages.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -80,9 +79,20 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nm_kategori' => 'required|string',
+        ]);
+
+        $kategori = Kategori::findOrFail($id);
+        $kategori->update($validatedData);
+
+        if ($kategori) {
+            return redirect()->route('kategori.index')->with('success', 'Data berhasil di update');
+        } else {
+            return redirect()->route('kategori.index')->with('error', 'Data gagal diupdate');
+        }
     }
 
     /**
@@ -91,8 +101,10 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil dihapus');
     }
 }

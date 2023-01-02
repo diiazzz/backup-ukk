@@ -17,11 +17,8 @@ class DataProdukController extends Controller
      */
     public function index()
     {
-        $tittle = 'produk';
-        $produks = Produk::with(['kategori'])->latest()->get();
-        return view('dashboard.data_produk.index', compact(
-            'produks'
-        ));
+        $produks = Produk::all();
+        return view('dashboard.adminPages.dataproduk.index', compact('produks'));
     }
 
     /**
@@ -31,10 +28,8 @@ class DataProdukController extends Controller
      */
     public function create()
     {
-        $kategoris = Kategori::all();
-        return view('dashboard.components.dataproduk.create',[
-            'kategoris' => $kategoris
-        ]);
+        $kategori = Kategori::all();
+        return view('dashboard.adminPages.dataproduk.create', compact('kategori'));
     }
 
     /**
@@ -54,7 +49,7 @@ class DataProdukController extends Controller
             'deskripsi'=> 'required',
         ]);
 
-         $produks = $request->all();
+        $produks = $request->all();
 
         if (isset($request->gambar)) {
             $file = $request->file('gambar');
@@ -121,7 +116,7 @@ class DataProdukController extends Controller
             $produk['gambar'] = $nama_file;
         }
 
-        $produks->update($produks);
+        // $produks->update($produks);
 
         return redirect('/data-produk')->with('berhasil', 'Data Produk Telah Diubah!');
     }
